@@ -19,24 +19,30 @@ public class WeaponsController : MonoBehaviour
         m_ProjectileList = new List<GameObject>();
     }
 
-    private IEnumerator ProjectileMovement(GameObject projectile) 
+    private IEnumerator ProjectileMovement(GameObject projectile)
     {
-        float CurrentLive=0;
-        SpriteRenderer sprite = projectile.GetComponentInChildren < SpriteRenderer> ();
+        float CurrentLive = 0;
+        SpriteRenderer sprite = projectile.GetComponentInChildren<SpriteRenderer>();
 
-        while (!m_Hit)
+        ProjectileComponent pc = projectile.GetComponent<ProjectileComponent>();
+
+
+        while (!pc.HasHit())
         {
             CurrentLive += Time.deltaTime;
-            Vector2 position = projectile.transform.position;
 
-            position.y += Speed * Time.deltaTime;
+            {
+                Vector2 position = projectile.transform.position;
 
-            projectile.transform.position = position;
+                position.y += Speed * Time.deltaTime;
+
+                projectile.transform.position = position;
 
 
-            if (CurrentLive > TimeToLive)
-                break;
-            yield return new WaitForEndOfFrame();
+                if (CurrentLive > TimeToLive)
+                    break;
+                yield return new WaitForEndOfFrame();
+            }
         }
 
         Destroy(projectile);

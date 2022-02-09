@@ -8,9 +8,14 @@ public class EnemyController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
+        if (collision.gameObject.tag.Contains("LeftBound"))
+            transform.parent.gameObject.GetComponent<EnemiesController>().GoRight();
+
+        if (collision.gameObject.tag.Contains("RightBound"))
+            transform.parent.gameObject.GetComponent<EnemiesController>().GoLeft();
+
         if (collision.gameObject.tag == "Projectile")
         {
-            Destroy(collision.gameObject);
             Destroy(gameObject);
         }
 

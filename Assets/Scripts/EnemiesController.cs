@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,60 +7,44 @@ public class EnemiesController : MonoBehaviour
 {
     public float Speed;
 
-    public float xMin = -0.5f;
-    public float xMax = 0.5f;
-    public float yStep = 1;
+    public float yStep = 0.2f;
 
-    private bool m_Side;
+    private float m_Direction = -1f;
+    private float m_SpeedMultiplier = 1.0f;
+    private bool m_StepDown = false;
 
-    public float Size = 7;
-
-    private void  CalculateLimits() 
+    public void GoRight()
     {
-        for (int i = 0; i < gameObject.transform.childCount; i++)
-        {
-            float currentX = gameObject.transform.GetChild(i).transform.position.x;
+        m_Direction = 1;
+        StepDown();
+    }
 
-            if (xMin > currentX)
-            {
-                xMin = currentX;
-            }
+    private void StepDown()
+    {
+        m_StepDown = true;
+        m_SpeedMultiplier += 0.1f;
+    }
 
-            if (xMax < currentX)
-            {
-                xMax = currentX;
-            }
-        }
+    public void GoLeft()
+    {
+        m_Direction = -1;
+        StepDown();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CalculateLimits();
         Vector3 position = transform.position;
 
-        if (m_Side)
-        {
-            position.x += Speed * Time.deltaTime;
-        }
-        else {
-            position.x -= Speed * Time.deltaTime;
-        }
+        position.x += m_Direction* Speed * m_SpeedMultiplier * Time.deltaTime;
 
-
-        if ( position.x < xMin + Size)
+        if (m_StepDown) 
         {
-            m_Side = true;
             position.y -= yStep;
-        }
 
-        if (position.x > xMax - Size)
-        {
-            m_Side = false;
-            position.y -= yStep;
+            m_StepDown = false;
         }
 
         transform.position = position;
-        
     }
 }

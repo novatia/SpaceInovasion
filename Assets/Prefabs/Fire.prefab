@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 1994444598736984140}
   - component: {fileID: 1994444598736984141}
   - component: {fileID: 2645264749862416910}
+  - component: {fileID: 2616664951129447961}
   m_Layer: 0
   m_Name: Fire
   m_TagString: Projectile
@@ -180,3 +181,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2616664951129447961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994444598736984137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b311cd3a41df5954aa4b81ecc553e1da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestroyOnHit: 1
+  Effect: 0

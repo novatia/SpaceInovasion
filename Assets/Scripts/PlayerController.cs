@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         float x = m_CurrentPosition.x;
 
         if (m_GameOver)
-            return;
+            Application.LoadLevel(0);
 
 
         if (!m_CantMoveLeft)
